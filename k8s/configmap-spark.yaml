@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: spark-config
+  namespace: urban-platform
+data:
+  SPARK_MASTER: "local[*]"
+  SPARK_APP_NAME: "UrbanSensors" 

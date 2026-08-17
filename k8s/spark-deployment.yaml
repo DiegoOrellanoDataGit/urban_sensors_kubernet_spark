@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: spark   
+  namespace: urban-platform
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spark
+  template:
+    metadata:
+      labels:
+        app: spark
+    spec:
+      containers:
+      - name: spark
+        image: spark:3.5.8-scala2.12-java17-python3-ubuntu
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 7077
+        - containerPort: 8080
+        envFrom:
+        - configMapRef:
+            name: spark-config
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        command: ["/opt/spark/bin/spark-class"]
+        args: ["org.apache.spark.deploy.master.Master",
+               "--host", "0.0.0.0",
+               "--port", "7077",
+               "--webui-port", "8080"]
