@@ -7,11 +7,9 @@ spec:
   selector:
     app: spark
   ports:
-    - name: spark-driver
+    - name: spark-master
       port: 7077
       targetPort: 7077
-      protocol: TCP
     - name: spark-ui
       port: 8080
       targetPort: 8080
-      protocol: TCP

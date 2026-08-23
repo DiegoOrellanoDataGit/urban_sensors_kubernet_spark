@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata: 
+metadata:
   name: zookeeper
   namespace: urban-platform
-spec: 
+spec:
   replicas: 1
   selector:
     matchLabels:
       app: zookeeper
-  template: 
+  template:
     metadata:
       labels:
         app: zookeeper
-    spec: 
+    spec:
       containers:
-      - name: zookeeper  
-        image: confluentinc/cp-zookeeper:7.5.0  
-        ports: 
+      - name: zookeeper
+        image: confluentinc/cp-zookeeper:7.5.0
+        ports:
         - containerPort: 2181
-        env: 
+        env:
         - name: ZOOKEEPER_CLIENT_PORT
           value: "2181"
         - name: ZOOKEEPER_TICK_TIME
-          value: "2000"          
+          value: "2000"
